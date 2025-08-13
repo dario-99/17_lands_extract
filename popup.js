@@ -31,19 +31,29 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
 
 function extractCardData() {
     let cards = [];
-    document.querySelectorAll("div.sc-lpcdUm").forEach(div => {
-        let aTag = div.querySelector("a");
-        let lastDiv = div.querySelector("div:last-child");
+    // Find each card container that has a background image
+    document.querySelectorAll("div.sc-eeGUxP").forEach(outerDiv => {
+        let style = outerDiv.getAttribute("style") || "";
+        let imageMatch = style.match(/url\(["']?(.*?)["']?\)/);
+        let imageUrl = imageMatch ? imageMatch[1] : null;
 
+        let innerDiv = outerDiv.querySelector("div.sc-lpcdUm");
+        if (!innerDiv) return;
+
+        let aTag = innerDiv.querySelector("a");
+        let lastDiv = innerDiv.querySelector("div:last-child");
         if (!aTag || !lastDiv) return;
 
-        let urlParams = new URLSearchParams(new URL(aTag.getAttribute("href"), window.location.origin).search);
+        let url = new URL(aTag.href, window.location.origin);
+        let urlParams = url.searchParams;
+
         cards.push({
             card_id: urlParams.get("card_id"),
             expansion: urlParams.get("expansion"),
             format: urlParams.get("format"),
             card_name: aTag.textContent.trim(),
-            gihwr: lastDiv.textContent.trim()
+            gihwr: lastDiv.textContent.trim(),
+            image_url: imageUrl.replace("art_crop", "large")
         });
     });
     extractedData = {
