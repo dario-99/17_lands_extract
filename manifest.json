@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Card Data Extractor",
+  "version": "1.0",
+  "description": "Extract card data from the page",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Extract Card Data",
+    "default_popup": "popup.html"
+  }
+}
