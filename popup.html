@@ -2,10 +2,24 @@
 <html>
   <head>
     <title>Card Data Extractor</title>
+    <style>
+      button {
+        margin: 5px 0;
+        padding: 5px 10px;
+      }
+      pre {
+        white-space: pre-wrap;
+        max-height: 300px;
+        overflow-y: auto;
+        background: #f7f7f7;
+        padding: 5px;
+      }
+    </style>
   </head>
   <body>
     <button id="extractBtn">Extract Card Data</button>
-    <pre id="output" style="white-space: pre-wrap;"></pre>
+    <button id="downloadBtn" disabled>Download JSON</button>
+    <pre id="output"></pre>
     <script src="popup.js"></script>
   </body>
 </html>
